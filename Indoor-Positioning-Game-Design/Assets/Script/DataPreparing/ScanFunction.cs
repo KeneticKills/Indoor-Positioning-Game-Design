@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System;
 using UnityEngine.SceneManagement;
+using UnityEngine.Android;
 
 public class ScanFunction : MonoBehaviour
 {
@@ -15,13 +16,20 @@ public class ScanFunction : MonoBehaviour
 
     private void Start()
     {
-        if (!useInput) return;
+        if (useInput)
+        {
 
-        TMP_InputField inputXField = InputX.GetComponent<TMP_InputField>();
-        TMP_InputField inputZField = InputZ.GetComponent<TMP_InputField>();
+            TMP_InputField inputXField = InputX.GetComponent<TMP_InputField>();
+            TMP_InputField inputZField = InputZ.GetComponent<TMP_InputField>();
 
-        inputXField.text = "";
-        inputZField.text = "";
+            inputXField.text = "";
+            inputZField.text = "";
+        }
+
+        if (!Permission.HasUserAuthorizedPermission(Permission.FineLocation))
+        {
+            Permission.RequestUserPermission(Permission.FineLocation);
+        }
     }
 
     string CleanInput(string input)
