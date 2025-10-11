@@ -4,14 +4,19 @@ using System.Collections;
 using TMPro;
 using System.IO;
 using System.Linq;
+using System;
+using UnityEngine.SceneManagement;
 
 public class ScanFunction : MonoBehaviour
 {
-    public Transform InputX;
-    public Transform InputZ;
+    [SerializeField] private bool useInput;
+    [SerializeField] private Transform InputX;
+    [SerializeField] private Transform InputZ;
 
     private void Start()
     {
+        if (!useInput) return;
+
         TMP_InputField inputXField = InputX.GetComponent<TMP_InputField>();
         TMP_InputField inputZField = InputZ.GetComponent<TMP_InputField>();
 
@@ -24,7 +29,34 @@ public class ScanFunction : MonoBehaviour
         return input.Replace("\u200B", ""); // remove ZERO WIDTH SPACE
     }
 
-    public void onClick() {
+    public void onClick(string buttonType) {
+        switch (buttonType.ToUpper()) {
+            case "SCAN":
+                scanFunction();
+                break;
+            case "RESULT":
+                resultFunction();
+                break;
+            case "BACK":
+                backFunction();
+                break;
+            default:
+                Debug.Log(name + " used unavailable button type (" + buttonType + ")");
+                break;
+        }
+    }
+
+    private void backFunction()
+    {
+        SceneManager.LoadScene("PositionMenu");
+    }
+
+    private void resultFunction()
+    {
+        SceneManager.LoadScene("RSSIResultTab");
+    }
+
+    private void scanFunction() {
         TMP_InputField inputXField = InputX.GetComponent<TMP_InputField>();
         TMP_InputField inputZField = InputZ.GetComponent<TMP_InputField>();
         string inputX = CleanInput(inputXField.text.Trim());
