@@ -1,0 +1,403 @@
+fileFormatVersion: 2
+guid: 0f9fde509317a364c8486ed6b5eef3c3
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3412391131534803589
+    second: "\u2014Pngtree\u2014black time icon_5464066_0"
+  - first:
+      213: -381732612657225361
+    second: "\u2014Pngtree\u2014black time icon_5464066_1"
+  - first:
+      213: -250565209200557385
+    second: "\u2014Pngtree\u2014black time icon_5464066_2"
+  - first:
+      213: 3050804483048847884
+    second: "\u2014Pngtree\u2014black time icon_5464066_3"
+  - first:
+      213: 5474237160214777565
+    second: "\u2014Pngtree\u2014black time icon_5464066_4"
+  - first:
+      213: 3932519045096128941
+    second: "\u2014Pngtree\u2014black time icon_5464066_5"
+  - first:
+      213: 8307528576253688646
+    second: "\u2014Pngtree\u2014black time icon_5464066_6"
+  - first:
+      213: -5912219759691999956
+    second: "\u2014Pngtree\u2014black time icon_5464066_7"
+  - first:
+      213: -6180957232277740986
+    second: "\u2014Pngtree\u2014black time icon_5464066_8"
+  - first:
+      213: -6795355825248673189
+    second: "\u2014Pngtree\u2014black time icon_5464066_9"
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 155, y: 157, z: 162, w: 161}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: "\u2014Pngtree\u2014black time icon_5464066_0"
+      rect:
+        serializedVersion: 2
+        x: 230
+        y: 768
+        width: 1379
+        height: 1002
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b7dbc227850c4a0d0800000000000000
+      internalID: -3412391131534803589
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u2014Pngtree\u2014black time icon_5464066_1"
+      rect:
+        serializedVersion: 2
+        x: 1595
+        y: 1225
+        width: 122
+        height: 169
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f6162671630d3baf0800000000000000
+      internalID: -381732612657225361
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u2014Pngtree\u2014black time icon_5464066_2"
+      rect:
+        serializedVersion: 2
+        x: 1677
+        y: 988
+        width: 93
+        height: 173
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7b287801540d58cf0800000000000000
+      internalID: -250565209200557385
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u2014Pngtree\u2014black time icon_5464066_3"
+      rect:
+        serializedVersion: 2
+        x: 302
+        y: 516
+        width: 163
+        height: 214
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c0abb437382a65a20800000000000000
+      internalID: 3050804483048847884
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u2014Pngtree\u2014black time icon_5464066_4"
+      rect:
+        serializedVersion: 2
+        x: 1638
+        y: 699
+        width: 118
+        height: 204
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dde48d681b568fb40800000000000000
+      internalID: 5474237160214777565
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u2014Pngtree\u2014black time icon_5464066_5"
+      rect:
+        serializedVersion: 2
+        x: 450
+        y: 327
+        width: 221
+        height: 193
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: da1c9637c3d139630800000000000000
+      internalID: 3932519045096128941
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u2014Pngtree\u2014black time icon_5464066_6"
+      rect:
+        serializedVersion: 2
+        x: 1506
+        y: 477
+        width: 140
+        height: 157
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 64bf10599354a4370800000000000000
+      internalID: 8307528576253688646
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u2014Pngtree\u2014black time icon_5464066_7"
+      rect:
+        serializedVersion: 2
+        x: 727
+        y: 231
+        width: 239
+        height: 113
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c25538de37393fda0800000000000000
+      internalID: -5912219759691999956
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u2014Pngtree\u2014black time icon_5464066_8"
+      rect:
+        serializedVersion: 2
+        x: 1053
+        y: 233
+        width: 206
+        height: 111
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 64224363524d83aa0800000000000000
+      internalID: -6180957232277740986
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u2014Pngtree\u2014black time icon_5464066_9"
+      rect:
+        serializedVersion: 2
+        x: 1317
+        y: 323
+        width: 159
+        height: 132
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b52eba951eb02b1a0800000000000000
+      internalID: -6795355825248673189
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 1537655665
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      "\u2014Pngtree\u2014black time icon_5464066_0": -3412391131534803589
+      "\u2014Pngtree\u2014black time icon_5464066_1": -381732612657225361
+      "\u2014Pngtree\u2014black time icon_5464066_2": -250565209200557385
+      "\u2014Pngtree\u2014black time icon_5464066_3": 3050804483048847884
+      "\u2014Pngtree\u2014black time icon_5464066_4": 5474237160214777565
+      "\u2014Pngtree\u2014black time icon_5464066_5": 3932519045096128941
+      "\u2014Pngtree\u2014black time icon_5464066_6": 8307528576253688646
+      "\u2014Pngtree\u2014black time icon_5464066_7": -5912219759691999956
+      "\u2014Pngtree\u2014black time icon_5464066_8": -6180957232277740986
+      "\u2014Pngtree\u2014black time icon_5464066_9": -6795355825248673189
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
