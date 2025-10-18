@@ -3,9 +3,13 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.Android;
+using UnityEngine.UI;
+using TMPro;
 
 public class ScanSystem : MonoBehaviour
 {
+    public TextMeshProUGUI Xdisplay;
+    public TextMeshProUGUI Zdisplay;
     private List<string> bssidList = new List<string>();  // store header BSSIDs
     private Dictionary<Vector2, Dictionary<string, float>> fingerprintDB
         = new Dictionary<Vector2, Dictionary<string, float>>();
@@ -66,6 +70,12 @@ public class ScanSystem : MonoBehaviour
             return;
         }
 
+        if (unityActivity == null)
+        {
+            Debug.LogError("UnityActivity not found!");
+            return;
+        }
+
         using (var unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
         {
             unityActivity = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
@@ -108,6 +118,11 @@ public class ScanSystem : MonoBehaviour
 
         var bestPos = EstimatePosition(currentScan);
         Debug.Log($"Estimated Position: {bestPos.x}, {bestPos.y}");
+
+        if (Xdisplay != null)
+            Xdisplay.text = "X: " + bestPos.x.ToString("F2");
+        if (Zdisplay != null)
+            Zdisplay.text = "Z: " + bestPos.y.ToString("F2");
     }
 
     Vector2 EstimatePosition(Dictionary<string, float> currentScan)
