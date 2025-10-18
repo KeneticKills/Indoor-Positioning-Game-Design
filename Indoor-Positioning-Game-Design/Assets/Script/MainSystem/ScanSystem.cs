@@ -8,8 +8,8 @@ using TMPro;
 
 public class ScanSystem : MonoBehaviour
 {
-    public TextMeshProUGUI Xdisplay;
-    public TextMeshProUGUI Zdisplay;
+    [SerializeField] private TextMeshProUGUI Xdisplay;
+    [SerializeField] private TextMeshProUGUI Zdisplay;
     private List<string> bssidList = new List<string>();  // store header BSSIDs
     private Dictionary<Vector2, Dictionary<string, float>> fingerprintDB
         = new Dictionary<Vector2, Dictionary<string, float>>();
