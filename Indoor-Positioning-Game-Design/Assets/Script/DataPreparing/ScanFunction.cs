@@ -182,10 +182,15 @@ public class ScanFunction : MonoBehaviour
         }
 
         string line = string.Join(",", headers.Select(h => rowData[h]));
+        string headerLine = string.Join(",", headers);
 
-        if (lines.Count == 0 || lines[0] != string.Join(",", headers))
+        if (lines.Count == 0)
         {
-            lines.Insert(0, string.Join(",", headers));
+            lines.Insert(0, headerLine);
+        }
+        else if (lines[0] != headerLine)
+        {
+            lines[0] = headerLine;
         }
 
         lines.Add(line);

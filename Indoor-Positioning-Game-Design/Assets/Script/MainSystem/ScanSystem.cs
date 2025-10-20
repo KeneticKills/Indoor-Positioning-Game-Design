@@ -70,6 +70,11 @@ public class ScanSystem : MonoBehaviour
             return;
         }
 
+        using (var unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
+        {
+            unityActivity = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
+        }
+
         if (unityActivity == null)
         {
             Debug.LogError("UnityActivity not found!");
@@ -127,14 +132,13 @@ public class ScanSystem : MonoBehaviour
 
     Vector2 EstimatePosition(Dictionary<string, float> currentScan)
     {
-        float minDistance = float.MaxValue;
-        Vector2 bestPos = Vector2.zero;
+        List<(float distance, Vector2 position)> allDistances = new List<(float, Vector2)>();
 
+        // Calculate distance to ALL fingerprints
         foreach (var kvp in fingerprintDB)
         {
             var refPos = kvp.Key;
             var refSignals = kvp.Value;
-
             float distance = 0;
             int matchCount = 0;
 
@@ -152,15 +156,42 @@ public class ScanSystem : MonoBehaviour
             if (matchCount > 0)
             {
                 distance = Mathf.Sqrt(distance / matchCount);
-                if (distance < minDistance)
-                {
-                    minDistance = distance;
-                    bestPos = refPos;
-                }
+                allDistances.Add((distance, refPos));
             }
         }
 
-        return bestPos;
+        // Handle edge case: no valid fingerprints
+        if (allDistances.Count == 0)
+        {
+            return Vector2.zero;
+        }
+
+        // Sort by distance (closest first)
+        allDistances.Sort((a, b) => a.distance.CompareTo(b.distance));
+
+        // Take K=3 nearest neighbors (or fewer if database is small)
+        int k = Mathf.Min(3, allDistances.Count);
+
+        // WKNN: Calculate weighted average using inverse distance weights
+        Vector2 weightedPosition = Vector2.zero;
+        float totalWeight = 0f;
+
+        for (int i = 0; i < k; i++)
+        {
+            float distance = allDistances[i].distance;
+            Vector2 position = allDistances[i].position;
+
+            // Calculate weight (inverse distance with small epsilon to avoid division by zero)
+            float weight = 1f / (distance + 0.0001f);
+
+            weightedPosition += position * weight;
+            totalWeight += weight;
+        }
+
+        // Normalize by total weight
+        weightedPosition /= totalWeight;
+
+        return weightedPosition;
     }
 
     IEnumerator autoScanCoroutine() {
