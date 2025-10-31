@@ -4,8 +4,8 @@ using UnityEngine.UI;
 public class MapData : MonoBehaviour
 {
     [Header("Assign in Inspector")]
-    public RectTransform mapArea;     // your MapPanel
-    public GameObject dotPrefab;      // red dot prefab (must have Image and Button)
+    public RectTransform mapArea;     // Your MapPanel (the red area)
+    public GameObject dotPrefab;      // Red dot prefab (must have Image and Button)
 
     [Header("Grid Settings")]
     public int rows = 5;
@@ -13,7 +13,10 @@ public class MapData : MonoBehaviour
     public float lineThickness = 4f;
     public Color lineColor = Color.white;
 
-    // Parents to control render order
+    [Header("Padding Settings")]
+    [Tooltip("Base padding around the grid. Automatically adjusts depending on grid size.")]
+    public float basePadding = 30f;
+
     private RectTransform linesParent;
     private RectTransform dotsParent;
 
@@ -26,64 +29,63 @@ public class MapData : MonoBehaviour
     {
         if (mapArea == null || dotPrefab == null)
         {
-            Debug.LogError("GridGenerator_Fixed: mapArea or dotPrefab is not assigned.");
+            Debug.LogError("MapData: mapArea or dotPrefab is not assigned.");
             return;
         }
 
-        // Clean up old children safely
+        // Clean up old grid
         for (int i = mapArea.childCount - 1; i >= 0; i--)
             DestroyImmediate(mapArea.GetChild(i).gameObject);
 
-        // Create two parents: one for lines (back), one for dots (front)
-        GameObject lp = new GameObject("LinesParent", typeof(RectTransform));
-        lp.transform.SetParent(mapArea, false);
-        linesParent = lp.GetComponent<RectTransform>();
-        linesParent.anchorMin = linesParent.anchorMax = new Vector2(0.5f, 0.5f);
-        linesParent.pivot = new Vector2(0.5f, 0.5f);
-        linesParent.anchoredPosition = Vector2.zero;
-        linesParent.sizeDelta = Vector2.zero;
+        // Create parents for layering
+        linesParent = CreateLayer("LinesParent");
+        dotsParent = CreateLayer("DotsParent");
 
-        GameObject dp = new GameObject("DotsParent", typeof(RectTransform));
-        dp.transform.SetParent(mapArea, false);
-        dotsParent = dp.GetComponent<RectTransform>();
-        dotsParent.anchorMin = dotsParent.anchorMax = new Vector2(0.5f, 0.5f);
-        dotsParent.pivot = new Vector2(0.5f, 0.5f);
-        dotsParent.anchoredPosition = Vector2.zero;
-        dotsParent.sizeDelta = Vector2.zero;
-
-        // Ensure correct sibling order: lines behind, dots front
+        // Ensure lines behind, dots in front
         linesParent.SetAsFirstSibling();
         dotsParent.SetAsLastSibling();
 
-        // Get map size (must have proper size; mapArea pivot = 0.5,0.5 recommended)
-        float width = mapArea.rect.width;
-        float height = mapArea.rect.height;
+        // Get full map size
+        float fullWidth = mapArea.rect.width;
+        float fullHeight = mapArea.rect.height;
 
+        // --- AUTO PADDING ---
+        // Larger grids = smaller padding, smaller grids = larger padding
+        float gridFactor = Mathf.Clamp01(((rows + cols) / 2f) / 10f); // normalize roughly between 0 and 1
+        float dynamicPadding = Mathf.Lerp(basePadding * 1.5f, basePadding * 0.5f, gridFactor);
+
+        // Calculate usable area (inside padding)
+        float width = fullWidth - (dynamicPadding * 2f);
+        float height = fullHeight - (dynamicPadding * 2f);
+
+        // Handle edge cases
         if (cols < 2 || rows < 2)
         {
-            Debug.LogWarning("GridGenerator_Fixed: rows/cols should be >= 2 for lines to draw nicely.");
+            Debug.LogWarning("MapData: rows/cols should be >= 2 for proper grid display.");
         }
 
+        // Calculate spacing based on usable area
         float spacingX = (cols > 1) ? width / (cols - 1) : 0;
         float spacingY = (rows > 1) ? height / (rows - 1) : 0;
 
-        // Draw horizontal lines (in linesParent)
+        // --- DRAW GRID LINES ---
         for (int y = 0; y < rows; y++)
         {
-            Vector2 start = new Vector2(-width / 2f, height / 2f - y * spacingY);
-            Vector2 end = new Vector2(width / 2f, height / 2f - y * spacingY);
+            float posY = height / 2f - y * spacingY;
+            Vector2 start = new Vector2(-width / 2f, posY);
+            Vector2 end = new Vector2(width / 2f, posY);
             CreateLine(linesParent, start, end);
         }
 
-        // Draw vertical lines (in linesParent)
         for (int x = 0; x < cols; x++)
         {
-            Vector2 start = new Vector2(-width / 2f + x * spacingX, height / 2f);
-            Vector2 end = new Vector2(-width / 2f + x * spacingX, -height / 2f);
+            float posX = -width / 2f + x * spacingX;
+            Vector2 start = new Vector2(posX, height / 2f);
+            Vector2 end = new Vector2(posX, -height / 2f);
             CreateLine(linesParent, start, end);
         }
 
-        // Create dots (in dotsParent) AFTER lines so they render above
+        // --- CREATE DOTS ---
         for (int y = 0; y < rows; y++)
         {
             for (int x = 0; x < cols; x++)
@@ -94,14 +96,21 @@ public class MapData : MonoBehaviour
                 GameObject dot = Instantiate(dotPrefab, dotsParent, false);
                 RectTransform drt = dot.GetComponent<RectTransform>();
                 drt.anchoredPosition = new Vector2(posX, posY);
-
-                // Make sure dot is on top within dotsParent
                 dot.transform.SetAsLastSibling();
-
-                // IMPORTANT: Ensure the dot's Image has raycastTarget = true and
-                // the lines' Images (created below) have raycastTarget = false so the button receives clicks.
             }
         }
+    }
+
+    private RectTransform CreateLayer(string name)
+    {
+        GameObject layer = new GameObject(name, typeof(RectTransform));
+        layer.transform.SetParent(mapArea, false);
+        RectTransform rt = layer.GetComponent<RectTransform>();
+        rt.anchorMin = rt.anchorMax = new Vector2(0.5f, 0.5f);
+        rt.pivot = new Vector2(0.5f, 0.5f);
+        rt.anchoredPosition = Vector2.zero;
+        rt.sizeDelta = Vector2.zero;
+        return rt;
     }
 
     private void CreateLine(RectTransform parent, Vector2 start, Vector2 end)
@@ -111,7 +120,7 @@ public class MapData : MonoBehaviour
 
         Image img = lineGO.GetComponent<Image>();
         img.color = lineColor;
-        img.raycastTarget = false; // lines shouldn't block button clicks
+        img.raycastTarget = false; // so lines don't block dot clicks
 
         RectTransform rt = lineGO.GetComponent<RectTransform>();
         rt.anchorMin = rt.anchorMax = new Vector2(0.5f, 0.5f);
