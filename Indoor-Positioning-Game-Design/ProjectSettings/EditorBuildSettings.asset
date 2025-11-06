@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/PositionMenu.unity
     guid: 4afbf7ce358267a4dba17884bf864474
   - enabled: 1
-    path: Assets/Scenes/RSSIResultTab.unity
+    path: Assets/Scenes/Map1Tab.unity
     guid: 568f257ab8b8c7343a867fe955bf42e5
   - enabled: 1
     path: Assets/Scenes/FingerPrintMenu.unity
