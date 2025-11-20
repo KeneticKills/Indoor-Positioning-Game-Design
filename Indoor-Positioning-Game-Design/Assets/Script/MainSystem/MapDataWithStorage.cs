@@ -10,6 +10,14 @@ public class MapDataWithStorage : MonoBehaviour
     [Header("Grid Settings")]
     public int rows = 5;
     public int cols = 5;
+
+    [Header("Grid Size (Rectangle)")]
+    [Tooltip("If enabled, grid will use custom width/height instead of filling the mapArea")]
+    public bool useCustomSize = false;
+    public float gridWidth = 400f;    // Custom width of the grid in pixels
+    public float gridHeight = 400f;   // Custom height of the grid in pixels
+
+    [Header("Line Settings")]
     public float lineThickness = 4f;
     public Color lineColor = Color.white;
 
@@ -33,7 +41,7 @@ public class MapDataWithStorage : MonoBehaviour
         }
 
         GenerateGrid();
-        
+
         // Try to load existing data
         if (dataManager.SaveFileExists())
         {
@@ -64,9 +72,23 @@ public class MapDataWithStorage : MonoBehaviour
         linesParent.SetAsFirstSibling();
         dotsParent.SetAsLastSibling();
 
-        // Get full map size
-        float fullWidth = mapArea.rect.width;
-        float fullHeight = mapArea.rect.height;
+        // Determine grid dimensions based on useCustomSize setting
+        float fullWidth, fullHeight;
+
+        if (useCustomSize)
+        {
+            // Use custom specified size
+            fullWidth = gridWidth;
+            fullHeight = gridHeight;
+            Debug.Log($"Using custom grid size: {gridWidth} x {gridHeight}");
+        }
+        else
+        {
+            // Use mapArea size (original behavior)
+            fullWidth = mapArea.rect.width;
+            fullHeight = mapArea.rect.height;
+            Debug.Log($"Using mapArea size: {fullWidth} x {fullHeight}");
+        }
 
         // --- AUTO PADDING ---
         float gridFactor = Mathf.Clamp01(((rows + cols) / 2f) / 10f);
@@ -87,6 +109,7 @@ public class MapDataWithStorage : MonoBehaviour
         float spacingY = (rows > 1) ? height / (rows - 1) : 0;
 
         // --- DRAW GRID LINES ---
+        // Horizontal lines
         for (int y = 0; y < rows; y++)
         {
             float posY = height / 2f - y * spacingY;
@@ -95,6 +118,7 @@ public class MapDataWithStorage : MonoBehaviour
             CreateLine(linesParent, start, end);
         }
 
+        // Vertical lines
         for (int x = 0; x < cols; x++)
         {
             float posX = -width / 2f + x * spacingX;
@@ -164,6 +188,7 @@ public class MapDataWithStorage : MonoBehaviour
     }
 
     // --- DATA MANAGEMENT METHODS ---
+    // All crucial data management features preserved below:
 
     /// <summary>
     /// Save current grid state to CSV
