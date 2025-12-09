@@ -11,7 +11,8 @@ public class MapDataWithStorage : MonoBehaviour
     [Header("Grid Settings")]
     public int rows = 5;
     public int cols = 5;
-    public List<Vector2> dotIgnore = new List<Vector2>(); 
+    public List<Vector2> dotIgnore = new List<Vector2>();
+    public int floor = 1;
 
     [Header("Grid Size (Rectangle)")]
     [Tooltip("If enabled, grid will use custom width/height instead of filling the mapArea")]
@@ -153,7 +154,7 @@ public class MapDataWithStorage : MonoBehaviour
                 {
                     dotData = dot.AddComponent<GridDotData>();
                 }
-                dotData.Initialize(x, y);
+                dotData.Initialize(x, y, floor);
 
                 // Store in 2D array for easy access
                 dotDataArray[y, x] = dotData;

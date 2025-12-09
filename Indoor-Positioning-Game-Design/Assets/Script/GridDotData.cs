@@ -11,6 +11,7 @@ public class GridDotData : MonoBehaviour
     [Header("Grid Position")]
     public int gridX;
     public int gridY;
+    public int floor;
     
     [Header("Stored Data")]
     public string storedData = "";
@@ -28,10 +29,11 @@ public class GridDotData : MonoBehaviour
         }
     }
 
-    public void Initialize(int x, int y)
+    public void Initialize(int x, int y, int floor)
     {
         gridX = x;
         gridY = y;
+        this.floor = floor;
         gameObject.name = $"Dot ({x},{y})";
     }
 
@@ -43,7 +45,7 @@ public class GridDotData : MonoBehaviour
         isVisited = !isVisited;
 
         if (isVisited) {
-            new ScanFunction().Initiate(gridX, gridY, isVisited);
+            new ScanFunction().Initiate(gridX, gridY, floor, isVisited);
         }
         
         // Update visual
