@@ -41,6 +41,10 @@ public class GridDotData : MonoBehaviour
         
         // Toggle visited state
         isVisited = !isVisited;
+
+        if (isVisited) {
+            new ScanFunction().Initiate(gridX, gridY, isVisited);
+        }
         
         // Update visual
         Image img = GetComponent<Image>();

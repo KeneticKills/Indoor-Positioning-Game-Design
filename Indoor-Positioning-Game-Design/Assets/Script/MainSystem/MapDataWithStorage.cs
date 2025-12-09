@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +11,7 @@ public class MapDataWithStorage : MonoBehaviour
     [Header("Grid Settings")]
     public int rows = 5;
     public int cols = 5;
+    public List<Vector2> dotIgnore = new List<Vector2>(); 
 
     [Header("Grid Size (Rectangle)")]
     [Tooltip("If enabled, grid will use custom width/height instead of filling the mapArea")]
@@ -134,6 +136,11 @@ public class MapDataWithStorage : MonoBehaviour
             {
                 float posX = -width / 2f + x * spacingX;
                 float posY = height / 2f - y * spacingY;
+
+                if (dotIgnore.Contains(new Vector2(x,y))) {
+                    Debug.Log("Ignore X : " + x + " ; Y : " + y);
+                    continue;
+                }
 
                 GameObject dot = Instantiate(dotPrefab, dotsParent, false);
                 RectTransform drt = dot.GetComponent<RectTransform>();
