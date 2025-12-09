@@ -19,10 +19,12 @@ public class ScanFunction : MonoBehaviour
 
     private float InputX;
     private float InputZ;
-    private bool write = true;
+    private bool write;
 
     private void Start()
     {
+        write = true;
+
         if (useInput)
         {
 
