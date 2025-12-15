@@ -138,11 +138,6 @@ public class MapDataWithStorage : MonoBehaviour
                 float posX = -width / 2f + x * spacingX;
                 float posY = height / 2f - y * spacingY;
 
-                if (dotIgnore.Contains(new Vector2(x,y))) {
-                    Debug.Log("Ignore X : " + x + " ; Y : " + y);
-                    continue;
-                }
-
                 GameObject dot = Instantiate(dotPrefab, dotsParent, false);
                 RectTransform drt = dot.GetComponent<RectTransform>();
                 drt.anchoredPosition = new Vector2(posX, posY);
@@ -154,7 +149,14 @@ public class MapDataWithStorage : MonoBehaviour
                 {
                     dotData = dot.AddComponent<GridDotData>();
                 }
+
                 dotData.Initialize(x, y, floor);
+
+                if (dotIgnore.Contains(new Vector2(x, y)))
+                {
+                    Debug.Log("Ignore X : " + x + " ; Y : " + y);
+                    dotData.Initialize(x, y, floor, true);
+                }
 
                 // Store in 2D array for easy access
                 dotDataArray[y, x] = dotData;
