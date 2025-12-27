@@ -11,6 +11,7 @@ public class GridDotData : MonoBehaviour
     [Header("Grid Position")]
     public int gridX;
     public int gridY;
+    public int floor;
     
     [Header("Stored Data")]
     public string storedData = "";
@@ -18,6 +19,7 @@ public class GridDotData : MonoBehaviour
     public int customValue = 0;
 
     private Button button;
+    public bool isHide = false;
 
     void Awake()
     {
@@ -28,10 +30,20 @@ public class GridDotData : MonoBehaviour
         }
     }
 
-    public void Initialize(int x, int y)
+    public void Initialize(int x, int y, int floor)
     {
         gridX = x;
         gridY = y;
+        this.floor = floor;
+        gameObject.name = $"Dot ({x},{y})";
+    }
+
+    public void Initialize(int x, int y, int floor, bool isHide)
+    {
+        gridX = x;
+        gridY = y;
+        this.floor = floor;
+        this.isHide = isHide;
         gameObject.name = $"Dot ({x},{y})";
     }
 
@@ -43,14 +55,14 @@ public class GridDotData : MonoBehaviour
         isVisited = !isVisited;
 
         if (isVisited) {
-            new ScanFunction().Initiate(gridX, gridY, isVisited);
+            //new ScanFunction().Initiate(gridX, gridY, floor, isVisited);
         }
         
         // Update visual
         Image img = GetComponent<Image>();
         if (img != null)
         {
-            img.color = isVisited ? Color.green : Color.red;
+            img.color = isVisited ? isHide ? new Color(1,0,0,0.3f) : Color.green : Color.red;
         }
 
         // Show popup with position and data

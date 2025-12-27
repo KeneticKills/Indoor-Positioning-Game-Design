@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Android;
 using UnityEngine.UI;
 using TMPro;
+using System.Text.RegularExpressions;
 
 public class ScanSystem : MonoBehaviour
 {
@@ -18,9 +19,29 @@ public class ScanSystem : MonoBehaviour
     private AndroidJavaObject wifiManager;
     [SerializeField] private bool autoScanEnable = false;
 
-    private void Start()
-    {
-        LoadFingerprintFile(Path.Combine(Application.persistentDataPath, "location_data.csv"));
+    private void start(int floor) {
+        string dirPath = Application.persistentDataPath;
+
+        if (Directory.Exists(dirPath))
+        {
+            // 1. Find all files that match the pattern "location_data_floor_*.csv"
+            string[] files = Directory.GetFiles(dirPath, "location_data_floor_*.csv");
+
+            foreach (string filePath in files)
+            {
+                // 2. Check the number of the floor using Regex
+                // This ensures we don't load a file named "location_data_floor_backup.csv" by mistake
+                // It only matches if the asterisk (*) is a number (e.g., "1", "2", "10")
+                string fileName = Path.GetFileName(filePath);
+                Match match = Regex.Match(fileName, @"location_data_floor_(\d+)\.csv");
+
+                if (match.Success)
+                {
+                    // 3. Loop and call your existing function
+                    LoadFingerprintFile(filePath);
+                }
+            }
+        }
     }
 
     void LoadFingerprintFile(string path)
@@ -212,25 +233,5 @@ public class ScanSystem : MonoBehaviour
         {
             StopCoroutine(autoScanCoroutine());
         }
-    }
-}
-
-class PositionHandler
-{
-    private float posX;
-    private float posZ;
-
-    private void calculatePosition() {
-        posX = 0;
-        posZ = 0;
-    }
-
-    private float getPosX() {
-        return posX;
-    }
-
-    public float getPosZ() 
-    {
-        return posZ;
     }
 }
