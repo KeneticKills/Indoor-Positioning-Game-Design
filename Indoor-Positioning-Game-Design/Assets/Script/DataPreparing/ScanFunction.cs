@@ -19,6 +19,7 @@ public class ScanFunction : MonoBehaviour
 
     private float InputX;
     private float InputZ;
+    private float floor;
     private bool write;
 
     private void Start()
@@ -53,7 +54,7 @@ public class ScanFunction : MonoBehaviour
         }
     }
 
-    public void Initiate(float InputX, float InputZ, bool write) {
+    public void Initiate(float InputX, float InputZ, int floor,bool write) {
         if (!Permission.HasUserAuthorizedPermission(Permission.FineLocation))
         {
             Permission.RequestUserPermission(Permission.FineLocation);
@@ -61,6 +62,7 @@ public class ScanFunction : MonoBehaviour
 
         this.InputX = InputX;
         this.InputZ = InputZ;
+        this.floor = floor;
         this.write = write;
 
         scanFunction();
@@ -90,7 +92,7 @@ public class ScanFunction : MonoBehaviour
             string bssid = scanResult.Get<string>("BSSID");
             int level = scanResult.Get<int>("level");
             results.Add((bssid, level));
-            Debug.Log($"[{i}] BSSID: {bssid}, RSSI: {level}");
+            Debug.Log($"[{i}] BSSID: {bssid}, RSSI: {level}, Floor: ");
         }
 
         writeFileFunction(results);
@@ -159,7 +161,7 @@ public class ScanFunction : MonoBehaviour
 
     private void writeFileFunction(List<(string bssid, int rssi)> scanResults)
     {
-        string fileName = "location_data.csv";
+        string fileName = $"location_data_floor_{floor}.csv";
         string filePath = Path.Combine(Application.persistentDataPath, fileName);
         bool fileExists = File.Exists(filePath);
         List<string> headers = new List<string> { "x", "z" };
